@@ -16,6 +16,10 @@ on:
         description: 'Available when the triggering PR is from a fork'
         required: false
 
+permissions:
+  actions: read
+  contents: write
+
 jobs:
   pr-create:
     runs-on: ubuntu-latest
@@ -25,7 +29,6 @@ jobs:
         uses: Tiryoh/gha-jobid-action@v1
         id: jobs
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           job_name: pr-create
 
       - uses: actions/checkout@v6
@@ -129,8 +132,6 @@ jobs:
           done
 
           echo "No submodule conflicts detected or no rebase in progress"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update site files
         id: update_site_files
@@ -151,8 +152,6 @@ jobs:
           commit_message: 'chore: Update branch with latest `${{ github.event.inputs.apg_branch }}` changes and submodule updates'
           branch: apg/${{ github.event.inputs.apg_branch }}
           push_options: '--force'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create or update pull request
         working-directory: ./
