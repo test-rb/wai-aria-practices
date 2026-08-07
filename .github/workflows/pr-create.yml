@@ -16,13 +16,14 @@ on:
         description: 'Available when the triggering PR is from a fork'
         required: false
 
-permissions:
-  actions: read
-  contents: write
-
 jobs:
   pr-create:
     runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Get current job and log url
@@ -160,7 +161,6 @@ jobs:
           npm install -C scripts/pr-create
           node ./scripts/pr-create
         env:
-          GH_TOKEN: ${{ secrets.W3CGRUNTBOT_TOKEN }}
           APG_SHA: ${{ github.event.inputs.apg_sha }}
           APG_BRANCH: ${{ github.event.inputs.apg_branch }}
           APG_PR_NUMBER: ${{ github.event.inputs.apg_pr_number }}
