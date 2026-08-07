@@ -2,7 +2,7 @@ import { Octokit } from '@octokit/rest';
 
 // octokit should be authenticated with GITHUB_TOKEN from GA
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.GH_TOKEN,
 });
 
 const jobId = process.env.JOB_ID;
