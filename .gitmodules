@@ -1,4 +1,4 @@
 [submodule "_external/aria-practices"]
 	path = _external/aria-practices
-	url = https://github.com/w3c/aria-practices.git
+	url = https://github.com/test-rb/aria-practices.git
 	branch = main
